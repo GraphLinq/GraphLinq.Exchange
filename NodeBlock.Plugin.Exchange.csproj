@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-       <ProjectReference Include="..\GraphLinq.Engine\GraphLinq.Engine.csproj" />
+       <ProjectReference Include="..\GraphLinq.Engine\NodeBlock.Engine.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
