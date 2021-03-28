@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Clone GraphLinq.Engine
-          command: git clone https://github.com/GraphLinq/GraphLinq.Engine.git ../
+          command: git clone https://github.com/GraphLinq/GraphLinq.Engine.git ../GraphLinq.Engine
       - run:
           name: Restore
           command: dotnet restore
