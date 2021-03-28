@@ -9,6 +9,9 @@ jobs:
           name: Clone GraphLinq.Engine
           command: git clone https://github.com/GraphLinq/GraphLinq.Engine.git ../GraphLinq.Engine
       - run:
+          name: Clone GraphLinq.Encoding
+          command: git clone https://github.com/GraphLinq/GraphLinq.Encoding.git ../GraphLinq.Encoding
+      - run:
           name: Restore
           command: dotnet restore
       - run:
