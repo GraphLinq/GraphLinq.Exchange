@@ -1,12 +1,15 @@
- version: 2.1
-
- orbs:
-  win: circleci/windows@2.2.0
-
- jobs:
-   build:
-     executor: win/default     
-    
-     steps:
-       - checkout
-       - run: dotnet build
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: jetcipher/circleci-dotnet-core:3.0
+    steps:
+      - checkout
+      - run:
+          name: Restore
+          command: dotnet restore
+          working_directory: GraphLinq.Exchange
+      - run:
+          name: Build
+          command: dotnet build -c Release
+          working_directory: GraphLinq.Exchange
