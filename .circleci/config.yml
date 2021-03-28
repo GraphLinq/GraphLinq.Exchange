@@ -8,8 +8,6 @@ jobs:
       - run:
           name: Restore
           command: dotnet restore
-          working_directory: GraphLinq.Exchange
       - run:
           name: Build
           command: dotnet build -c Release
-          working_directory: GraphLinq.Exchange
