@@ -1,6 +1,8 @@
 version: 2.1
 jobs:
   build:
+    environment:
+      BUILD_VERSION: 1.0.3
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:3.1
     steps:
@@ -17,3 +19,12 @@ jobs:
       - run:
           name: Build
           command: dotnet build -c Release
+      - run:
+          name: Pack
+          command: dotnet pack --output nuget_build --configuration Release -p:Version=$BUILD_VERSION
+      - run:
+          name: Add Github registry
+          command: dotnet nuget add source -n graphlinq -u $GITHUB_USERNAME -p $GITHUB_TOKEN "https://nuget.pkg.github.com/GraphLinq/index.json"
+      - run:
+          name: Publish nuget
+          command: dotnet nuget push "nuget_build/GraphLinq.Exchange.$BUILD_VERSION.nupkg" --api-key $GITHUB_TOKEN --source "graphlinq"  --no-service-endpoint

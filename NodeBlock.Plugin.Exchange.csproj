@@ -5,6 +5,13 @@
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <PublishSingleFile>true</PublishSingleFile>
     <PublishTrimmed>true</PublishTrimmed>
+
+    <PackageId>GraphLinq.Exchange</PackageId>
+    <Version>1.0.1</Version>
+    <Authors>GraphLinq Team</Authors>
+    <Company>GraphLinq</Company>
+    <PackageDescription>This package allow the GraphLinq Engine to interact with CEX</PackageDescription>
+    <RepositoryUrl>https://github.com/GraphLinq/GraphLinq.Exchange</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -25,13 +32,13 @@
     <PackageReference Include="NetTrader.Indicator" Version="1.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
-
+  
   <ItemGroup>
-       <ProjectReference Include="..\GraphLinq.Engine\NodeBlock.Engine.csproj" />
+    <ProjectReference Include="..\GraphLinq.Engine\NodeBlock.Engine.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Condition=" '$(OS)' != 'Unix' " Command="copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(SolutionDir)\NodeBlock.CLI\bin\Debug\netcoreapp3.1\plugins&quot;" />
+    <!-- <Exec Condition=" '$(OS)' != 'Unix' " Command="copy /Y &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;$(SolutionDir)\NodeBlock.CLI\bin\Debug\netcoreapp3.1\plugins&quot;" /> -->
   </Target>
 
 </Project>
