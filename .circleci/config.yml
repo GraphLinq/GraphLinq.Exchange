@@ -23,11 +23,8 @@ jobs:
           name: Pack
           command: dotnet pack --output nuget_build --configuration Release -p:Version=$BUILD_VERSION
       - run:
-          name: Test
-          command: echo $GITHUB_USERNAME && echo $GITHUB_TOKEN
-      - run:
           name: Add Github registry
-          command: dotnet nuget add source -n graphlinq -u $GITHUB_USERNAME -p $GITHUB_TOKEN "https://nuget.pkg.github.com/GraphLinq/index.json"
+          command: dotnet nuget add source -n graphlinq -u $GITHUB_USERNAME -p $GITHUB_TOKEN "https://nuget.pkg.github.com/GraphLinq/index.json" --store-password-in-clear-text
       - run:
           name: Publish nuget
           command: dotnet nuget push "nuget_build/GraphLinq.Exchange.$BUILD_VERSION.nupkg" --api-key $GITHUB_TOKEN --source "graphlinq"  --no-service-endpoint
