@@ -19,6 +19,9 @@ jobs:
       - run:
           name: Build
           command: dotnet build -c Release
+      - store_artifacts:
+          path: bin/Release/netcoreapp3.1/NodeBlock.Plugin.Exchange.dll
+          destination: NodeBlock.Plugin.Exchange.dll
       - run:
           name: Pack
           command: dotnet pack --output nuget_build --configuration Release -p:Version=$BUILD_VERSION
@@ -28,3 +31,11 @@ jobs:
       - run:
           name: Publish nuget
           command: dotnet nuget push "nuget_build/GraphLinq.Exchange.$BUILD_VERSION.nupkg" --api-key $GITHUB_TOKEN --source "graphlinq"  --no-service-endpoint
+workflows:
+  version: 2
+  build-master:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
