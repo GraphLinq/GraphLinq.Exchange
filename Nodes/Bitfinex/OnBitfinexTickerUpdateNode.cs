@@ -32,8 +32,8 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Bitfinex
 
         public override void SetupEvent()
         {
-            BitfinexConnectorNode binanceConnector = this.InParameters["bitfinex"].GetValue() as BitfinexConnectorNode;
-            binanceConnector.SocketClient.SubscribeToBookUpdates(this.InParameters["symbol"].GetValue().ToString(),Precision.PrecisionLevel0,Frequency.Realtime,100, (data) =>
+            BitfinexConnectorNode bitfinexConnector = this.InParameters["bitfinex"].GetValue() as BitfinexConnectorNode;
+            bitfinexConnector.SocketClient.SubscribeToBookUpdates(this.InParameters["symbol"].GetValue().ToString(),Precision.PrecisionLevel0,Frequency.Realtime,100, (data) =>
             {
                 var instanciatedParameters = this.InstanciateParametersForCycle();
                 instanciatedParameters["bestPrice"].SetValue((decimal)data.ToList()[0].Price);
