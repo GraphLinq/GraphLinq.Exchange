@@ -11,10 +11,10 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Bittrex.Events
     [NodeDefinition("OnBittrexTickerUpdateNode", "On Bittrex Pair Ticker Update", NodeTypeEnum.Event, "Bittrex")]
     [NodeGraphDescription("Get a event when the book ticker is updated on Bittrex for a symbol")]
     [NodeCycleLimit(1000)]
-    public class OnBittrexTickerUpdateNode : Node
+    public class OnCoinExTickerUpdateNode : Node
     {
-        public OnBittrexTickerUpdateNode(string id, BlockGraph graph)
-              : base(id, graph, typeof(OnBittrexTickerUpdateNode).Name)
+        public OnCoinExTickerUpdateNode(string id, BlockGraph graph)
+              : base(id, graph, typeof(OnCoinExTickerUpdateNode).Name)
         {
             this.IsEventNode = true;
 
@@ -34,8 +34,8 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Bittrex.Events
 
         public override void SetupEvent()
         {
-            BittrexConnectorNode binanceConnector = this.InParameters["bittrex"].GetValue() as BittrexConnectorNode;
-            var result = binanceConnector.SocketClient.SubscribeToSymbolTickerUpdatesAsync(this.InParameters["symbol"].GetValue().ToString(), (data) =>
+            BittrexConnectorNode bittrexConnector = this.InParameters["bittrex"].GetValue() as BittrexConnectorNode;
+            var result = bittrexConnector.SocketClient.SubscribeToSymbolTickerUpdatesAsync(this.InParameters["symbol"].GetValue().ToString(), (data) =>
             {
                 var instanciatedParameters = this.InstanciateParametersForCycle();
                 instanciatedParameters["bestAskPrice"].SetValue(data.AskRate);
