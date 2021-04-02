@@ -22,6 +22,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.CoinGecko
             this.OutParameters.Add("price", new NodeParameter(this, "price", typeof(double), false));
             this.OutParameters.Add("ath", new NodeParameter(this, "ath", typeof(double), false));
             this.OutParameters.Add("marketCapChange24H", new NodeParameter(this, "marketCapChange24H", typeof(double), false));
+            this.OutParameters.Add("marketCap", new NodeParameter(this, "marketCap", typeof(double), false));
             this.OutParameters.Add("volume24H", new NodeParameter(this, "volume24H", typeof(double), false));
         }
         public override bool CanBeExecuted => true;
@@ -38,6 +39,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.CoinGecko
             this.OutParameters["marketCapChange24H"].SetValue(result.MarketData.MarketCapChangePercentage24H);
             this.OutParameters["ath"].SetValue(result.MarketData.Ath["usd"]);
             this.OutParameters["volume24H"].SetValue(result.MarketData.TotalVolume["usd"]);
+            this.OutParameters["marketCap"].SetValue(result.MarketData.MarketCap["usd"]);
             return true;
         }
     }
