@@ -17,10 +17,11 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
             this.InParameters.Add("mxc", new NodeParameter(this, "mxc", typeof(MxcConnectorNode), true));
             this.InParameters.Add("symbol", new NodeParameter(this, "symbol", typeof(string), true));
 
-            this.OutParameters.Add("hight", new NodeParameter(this, "hight", typeof(decimal), false));
-            this.OutParameters.Add("low", new NodeParameter(this, "low", typeof(decimal), false));
-            this.OutParameters.Add("bid", new NodeParameter(this, "bid", typeof(decimal), false));
-            this.OutParameters.Add("ask", new NodeParameter(this, "ask", typeof(decimal), false));
+            this.OutParameters.Add("bid_price", new NodeParameter(this, "bid_price", typeof(decimal), false));
+            this.OutParameters.Add("bid_quantity", new NodeParameter(this, "bid_quantity", typeof(decimal), false));
+
+            this.OutParameters.Add("ask_price", new NodeParameter(this, "ask_price", typeof(decimal), false));
+            this.OutParameters.Add("ask_quantity", new NodeParameter(this, "ask_quantity", typeof(decimal), false));
 
         }
 
@@ -35,8 +36,14 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
             param.Add("symbol", "ETH_USDT");
             param.Add("depth", "1");
 
-            var result = connector.Client.Get<MarketPrice>("/open/api/v2/market/depth", param);
-            // todo : assign output
+            var result = connector.Client.Get<MarketPriceEntity>("/open/api/v2/market/depth", param);
+
+            this.OutParameters["ask_price"].SetValue(result.data.asks[0].price);
+            this.OutParameters["ask_quantity"].SetValue(result.data.asks[0].quantity);
+
+            this.OutParameters["bid_price"].SetValue(result.data.bids[0].price);
+            this.OutParameters["bid_quantity"].SetValue(result.data.bids[0].quantity);
+
             return true;
         }
     }

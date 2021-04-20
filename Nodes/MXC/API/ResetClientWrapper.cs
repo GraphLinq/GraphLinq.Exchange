@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using NodeBlock.Plugin.Exchange.Nodes.MXC.Entities;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -22,10 +23,20 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC.API
             ping();
         }
 
+        private void ping()
+        {
+           var result =  Get<PingEntity>("/open/api/v2/common/ping", new Dictionary<string, string>());
+            if(result.code == 0)
+            {
+                throw new Exception("Can't reach url");
+            }
+        }
+
         public T Get<T>(string url, Dictionary<string, string> param) where T : class
         {
             return call<T>("GET", url, param, false);
         }
+       
         private T call<T>(string method, string url,Dictionary<string,string> param, bool needSign) where T : class
         {
             param.Add("api_key", this.accessKey);
@@ -52,10 +63,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC.API
             return null;
         }
 
-        private void ping()
-        {
-            // implement ping method
-        }
+       
 
 
         public void Dispose()
