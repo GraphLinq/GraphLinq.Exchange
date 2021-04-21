@@ -36,6 +36,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Binance
                 BinanceConnectorNode binanceConnector = this.InParameters["connection"].GetValue() as BinanceConnectorNode;
                 decimal quantity = decimal.Parse(this.InParameters["quantity"].GetValue().ToString(), CultureInfo.InvariantCulture);
                 var order = binanceConnector.Client.Spot.Order.PlaceOrder(this.InParameters["symbol"].GetValue().ToString(), global::Binance.Net.Enums.OrderSide.Buy, global::Binance.Net.Enums.OrderType.Market, quantity: quantity);
+
                 this.OutParameters["orderId"].SetValue(order.Data.OrderId);
                 this.OutParameters["price"].SetValue(order.Data.Price);
                 this.OutParameters["result"].SetValue(order.Success);

@@ -32,32 +32,62 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC.API
             }
         }
 
-        public T Get<T>(string url, Dictionary<string, string> param) where T : class
+        public T Get<T>(string url, Dictionary<string, string> param,bool sign = false) where T : class
         {
-            return call<T>("GET", url, param, false);
+            return call<T>("GET", url, null,param, sign);
         }
-       
-        private T call<T>(string method, string url,Dictionary<string,string> param, bool needSign) where T : class
+
+        public T Post<T>(string url, Dictionary<string, string> param, bool sign = false) where T : class
+        {
+            return call<T>("POST", url, param, new Dictionary<string, string>(), sign);
+        }
+
+        private T call<T>(string method, string url, Dictionary<string, string> objects, Dictionary<string,string> param, bool needSign) where T : class
         {
             param.Add("api_key", this.accessKey);
             if (needSign)
             {
                 TimeSpan t = DateTime.UtcNow - new DateTime(1970, 1, 1);
                 param.Add("req_time", (int)t.TotalSeconds + "");
-                param.Add("recv_window", "60");
                 param.Add("sign", Utils.CreateSignature(method,url,param,this.secretkey));           
             }
 
             if(method == "GET")
             {
-                Utils.GetRequestParamString(param);
-                var request = client.GetAsync(host + url + "?" + Utils.GetRequestParamString(param));
+                var request_url = host + url + "?" + Utils.GetRequestParamString(param);
+                var request = client.GetAsync(request_url);
                 request.Wait();
                 var responseContent = request.Result.Content.ReadAsStringAsync();
                 responseContent.Wait();
                 var result = responseContent.Result;
                 var data = JsonConvert.DeserializeObject<T>(responseContent.Result);
+
+                dynamic code = data;
+                if (code.code != 200)
+                {
+                    throw new Exception("Failed params request ! ");
+                }
                 return data;
+            }
+            else if (method == "POST")
+            {
+                var request_url = host + url + "?" + Utils.GetRequestParamString(param);
+                var json = JsonConvert.SerializeObject(objects);
+                var request = client.PostAsync(request_url, new StringContent(json, Encoding.UTF8, "application/json"));
+                request.Wait();
+                var responseContent = request.Result.Content.ReadAsStringAsync();
+                responseContent.Wait();
+                var result = responseContent.Result;
+                var data = JsonConvert.DeserializeObject<T>(responseContent.Result);
+                dynamic code = data;
+
+                if (code.code != 200)
+                {
+                    throw new Exception("Failed params request ! ");
+                }
+
+                return data;
+
             }
 
             return null;

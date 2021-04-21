@@ -37,7 +37,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
 
         public override void SetupConnector()
         {
-            Client = new ResetClientWrapper(this.InParameters["apiKey"].GetValue().ToString(), this.InParameters["apiSecret"].GetValue().ToString());
+            Client = new ResetClientWrapper(this.InParameters["apiSecret"].GetValue().ToString(), this.InParameters["apiKey"].GetValue().ToString());
             this.Next();
         }
 

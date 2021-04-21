@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
-
+using System.Linq;
 namespace NodeBlock.Plugin.Exchange.Nodes.MXC.API
 {
     class Utils
@@ -16,10 +16,10 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC.API
             }
 
             var sb = new StringBuilder(1024);
-            sb.Append(method.ToUpper()).Append('\n')
-              .Append(uri).Append('\n');
+            sb.Append(method.ToUpper()).Append("\n")
+              .Append(uri).Append("\n");
             SortedDictionary<string, string> map = new SortedDictionary<string, string>(param);
-
+            
             foreach (var entry in map)
             {
                 string key = entry.Key;
@@ -28,8 +28,8 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC.API
             }
 
             sb.Length--;
-
-            return ActualSignature(sb.ToString(), secretKey);
+            var str = sb.ToString();
+            return ActualSignature(str, secretKey);
         }
 
         public static string GetRequestParamString(Dictionary<string,string> param)
@@ -65,27 +65,22 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC.API
             return ActualSignature(str, signVo.SecretKey);
         }
 
-        public static string ActualSignature(string inputStr,string key)
+        private static byte[] StringEncode(string text)
         {
-            var hmac = new HMACSHA256(System.Text.Encoding.UTF8.GetBytes(key));
-            var hesh  = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(inputStr));
-            return ToHexString(hesh);
+            var encoding = new UTF8Encoding();
+            return encoding.GetBytes(text);
         }
 
-        public static string ToHexString(byte[] bytes) 
+        private static string HashEncode(byte[] hash)
         {
-            string hexString = string.Empty;
-            if (bytes != null)
-            {
-                StringBuilder strB = new StringBuilder();
+            return BitConverter.ToString(hash).Replace("-", "").ToLower();
+        }
 
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    strB.Append(bytes[i].ToString("X2"));
-                }
-                hexString = strB.ToString();
-            }
-            return hexString;
+        public static string ActualSignature(string inputStr, string key)
+        {
+            var hmac = new HMACSHA256(StringEncode(key));
+            var hesh = hmac.ComputeHash(StringEncode(inputStr));
+            return HashEncode(hesh);
         }
     }
 }

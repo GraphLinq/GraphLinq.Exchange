@@ -33,7 +33,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
         {
             MxcConnectorNode connector = this.InParameters["mxc"].GetValue() as MxcConnectorNode;
             Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("symbol", "ETH_USDT");
+            param.Add("symbol", this.InParameters["symbol"].GetValue().ToString());
             param.Add("depth", "1");
 
             var result = connector.Client.Get<MarketPriceEntity>("/open/api/v2/market/depth", param);
