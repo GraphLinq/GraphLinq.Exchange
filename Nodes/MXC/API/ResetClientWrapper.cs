@@ -19,7 +19,6 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC.API
             this.secretkey = secretkey;
             this.accessKey = accessKey;
             client = new HttpClient();
-           // client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla / 5.0(Windows NT 10.0; WOW64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 72.0.3626.96 Safari / 537.36");
             ping();
         }
 

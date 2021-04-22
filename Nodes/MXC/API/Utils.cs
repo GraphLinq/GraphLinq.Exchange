@@ -12,7 +12,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC.API
         {
             if (param.Count == 0)
             {
-                return "";
+                return string.Empty;
             }
 
             var sb = new StringBuilder(1024);
@@ -36,7 +36,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC.API
         {
             if(param.Count == 0)
             {
-                return "";
+                return string.Empty;
             }
 
             var sb = new StringBuilder(1024);
