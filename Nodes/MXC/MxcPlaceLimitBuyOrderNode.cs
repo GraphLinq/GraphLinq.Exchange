@@ -9,6 +9,8 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
 {
     [NodeDefinition("MxcPlaceLimitBuyOrderNode", "Place Limit Buy Order", NodeTypeEnum.Function, "MXC")]
     [NodeGraphDescription("Allows you to place a limit buy order on mxc. example result : true for success order and false for fail")]
+    [NodeSpecialActionAttribute("Go to mxc api #place_order", "open_url", "https://mxcdevelop.github.io/APIDoc/open.api.v2.en.html#place-ordere")]
+
     public class MxcPlaceLimitBuyOrderNode : Node
     {
         public MxcPlaceLimitBuyOrderNode(string id, BlockGraph graph)

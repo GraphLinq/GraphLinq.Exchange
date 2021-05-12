@@ -10,6 +10,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
 {
     [NodeDefinition("MxcPlaceMarketSellOrderNode", "Place Market Sell Order", NodeTypeEnum.Function, "MXC")]
     [NodeGraphDescription("Allows you to place a market sell order on mxc. example result : true for success order and false for fail")]
+    [NodeSpecialActionAttribute("Go to mxc api #place_order", "open_url", "https://mxcdevelop.github.io/APIDoc/open.api.v2.en.html#place-order")]
     public class MxcPlaceMarketSellOrderNode : Node
     {
         public MxcPlaceMarketSellOrderNode(string id, BlockGraph graph)
