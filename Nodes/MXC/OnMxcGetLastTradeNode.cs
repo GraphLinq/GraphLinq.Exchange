@@ -4,13 +4,12 @@ using Quobject.SocketIoClientDotNet.Client;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Text;
 
 namespace NodeBlock.Plugin.Exchange.Nodes.MXC
 {
 
     [NodeDefinition("OnMxcGetLastTradeNode", "On Mxc Get Last Trade Node", NodeTypeEnum.Event, "MXC")]
-    [NodeGraphDescription("event that get the last transaction by a symbol.")]
+    [NodeGraphDescription("event that get the last transaction by a symbol. symbol example : ETH_USDT")]
     [NodeSpecialActionAttribute("Go to mxc docs #request : sub.symbol", "open_url", "https://github.com/mxcdevelop/APIDoc/blob/master/websocket/spot/websocket-api.md")]
     [NodeCycleLimit(1000)]
     public class OnMxcGetLastTradeNode : Node
@@ -20,7 +19,9 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
         {
             this.IsEventNode = true;
 
-            this.InParameters.Add("symbol", new NodeParameter(this, "symbol", typeof(string), false));
+            this.InParameters.Add("symbol", new NodeParameter(this, "symbol", typeof(string), true));
+            this.OutParameters.Add("trades", new NodeParameter(this, "trades", typeof(List<object>), false));
+
         }
 
         public override bool CanBeExecuted => false;
@@ -39,6 +40,8 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
                 client.Emit("sub.symbol", dictionary);
             });
 
+            client.On(Socket.EVENT_ERROR, OnError);
+
             client.On("push.symbol",OnEvent);
 
             client.Open();
@@ -46,9 +49,25 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
 
         }
 
+        private void OnError(dynamic error)
+        {
+            var dictionary = new Dictionary<string, string>();
+            dictionary.Add("symbol", this.InParameters["symbol"].GetValue().ToString());
+            client.Emit("unsub.symbol", dictionary);
+            client.Disconnect();
+        }
+
         private void OnEvent(dynamic data)
         {
-            Console.WriteLine(data);
+            var instanciatedParameters = this.InstanciateParametersForCycle();
+
+            var deals = data.data?.deals;
+            if(deals != null)
+            {
+                instanciatedParameters["trades"].SetValue(deals);
+
+            }
+            this.Graph.AddCycle(this, instanciatedParameters);
         }
 
         public override void BeginCycle()
