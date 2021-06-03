@@ -9,6 +9,8 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
 {
     [NodeDefinition("MxcGetBalanceNode.", "Get MXC Balance", NodeTypeEnum.Function, "MXC")]
     [NodeGraphDescription("Get the current account balance on MXC. data is json result.")]
+    [NodeSpecialActionAttribute("Go to mxc api #balance", "open_url", "https://mxcdevelop.github.io/APIDoc/open.api.v2.en.html#balance")]
+
     public class MxcGetBalanceNode : Node
     {
         public MxcGetBalanceNode(string id, BlockGraph graph)

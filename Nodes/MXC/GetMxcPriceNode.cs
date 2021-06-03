@@ -9,6 +9,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
 {
     [NodeDefinition("GetMxcPriceNode.", "Get MXC Price", NodeTypeEnum.Function, "MXC")]
     [NodeGraphDescription("Get the current price on MXC for a symbol. Symbol example : ETH_USDT")]
+    [NodeSpecialActionAttribute("Go to mxc api #market-data", "open_url", "https://mxcdevelop.github.io/APIDoc/open.api.v2.en.html#market-data")]
     public class GetMxcPriceNode : Node
     {
         public GetMxcPriceNode(string id, BlockGraph graph)
