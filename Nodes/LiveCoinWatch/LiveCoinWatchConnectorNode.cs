@@ -9,7 +9,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
     [NodeDefinition("LiveCoinWatchConnectorNode", "LiveCoinWatch Connector", NodeTypeEnum.Connector, "LiveCoinWatch")]
     [NodeGraphDescription("LiveCoinWatch Connector")]
     [NodeSpecialActionAttribute("Go to LiveCoinWatch API Portal", "open_url", "https://www.livecoinwatch.com/tools/api")]
-    [NodeIDEParameters(Hidden = true)]
+    [NodeIDEParameters(Hidden = false)]
     public class LiveCoinWatchConnectorNode : Node
     {
         public LiveCoinWatchConnectorNode(string id, BlockGraph graph)

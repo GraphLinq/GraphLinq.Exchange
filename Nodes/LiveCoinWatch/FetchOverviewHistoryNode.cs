@@ -19,7 +19,11 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.InParameters.Add("start", new NodeParameter(this, "start", typeof(int), true));
             this.InParameters.Add("end", new NodeParameter(this, "end", typeof(int), true));
 
-            this.OutParameters.Add("history", new NodeParameter(this, "history", typeof(array), false));
+            this.OutParameters.Add("liquidity", new NodeParameter(this, "liquidity", typeof(int), false));
+            this.OutParameters.Add("btcDominance", new NodeParameter(this, "btcDominance", typeof(double), false));
+            this.OutParameters.Add("volume", new NodeParameter(this, "volume", typeof(int), false));
+            this.OutParameters.Add("cap", new NodeParameter(this, "cap", typeof(int), false));
+            this.OutParameters.Add("date", new NodeParameter(this, "date", typeof(int), false));
         }
 
         public override bool CanBeExecuted => true;
@@ -37,7 +41,11 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             );
             coinRequest.Wait();
 
-            this.OutParameters["history"].SetValue(coinRequest.Result.History);
+            this.OutParameters["date"].SetValue(coinRequest.Result.Date);
+            this.OutParameters["liquidity"].SetValue(coinRequest.Result.Liquidity);
+            this.OutParameters["btcDominance"].SetValue(coinRequest.Result.btcDominance);
+            this.OutParameters["volume"].SetValue(coinRequest.Result.Volume);
+            this.OutParameters["cap"].SetValue(coinRequest.Result.Cap);
 
             return true;
         }

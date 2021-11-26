@@ -35,7 +35,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.OutParameters.Add("exchanges", new NodeParameter(this, "exchanges", typeof(int), false));
             this.OutParameters.Add("markets", new NodeParameter(this, "markets", typeof(int), false));
             this.OutParameters.Add("pairs", new NodeParameter(this, "pairs", typeof(int), false));
-            this.OutParameters.Add("history", new NodeParameter(this, "history", typeof(array), false));
+            this.OutParameters.Add("history", new NodeParameter(this, "history", typeof(string), false));
         }
 
         public override bool CanBeExecuted => true;

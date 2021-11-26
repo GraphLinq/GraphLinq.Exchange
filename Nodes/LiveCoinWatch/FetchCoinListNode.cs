@@ -8,7 +8,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
 {
     [NodeDefinition("FetchCoinListNode", "Fetch Coin List", NodeTypeEnum.Function, "LiveCoinWatch")]
     [NodeGraphDescription("Fetch coin list on LiveCoinWatch")]
-    [NodeIDEParameters(Hidden = true)]
+    [NodeIDEParameters(Hidden = false)]
     public class FetchCoinListNode : Node
     {
         public FetchCoinListNode(string id, BlockGraph graph)
@@ -39,8 +39,9 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
                 this.InParameters["currency"].GetValue().ToString(),
                 this.InParameters["sort"].GetValue().ToString(),
                 this.InParameters["order"].GetValue().ToString(),
-                this.InParameters["offset"].GetValue(),
-                this.InParameters["limit"].GetValue()
+                this.InParameters["limit"].GetValue(),
+                this.InParameters["offset"].GetValue()
+                
             );
             coinRequest.Wait();
 

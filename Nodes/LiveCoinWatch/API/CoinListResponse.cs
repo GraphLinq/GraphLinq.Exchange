@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch.API
 {
-    public class CoinSingleResponse
+    public class CoinListResponse
     {
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -38,22 +38,22 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch.API
         public double AllTimeHighUSD { get; set; }
 
         [JsonProperty("circulatingSupply")]
-        public double CirculatingSupply { get; set; }
-
-        [JsonProperty("maxSupply")]
-        public double MaxSupply { get; set; }
+        public int CirculatingSupply { get; set; }
 
         [JsonProperty("totalSupply")]
-        public double TotalSupply { get; set; }
+        public int TotalSupply { get; set; }
+
+        [JsonProperty("maxSupply")]
+        public int MaxSupply { get; set; }
 
         [JsonProperty("rate")]
         public double Rate { get; set; }
 
         [JsonProperty("volume")]
-        public double Volume { get; set; }
+        public int Volume { get; set; }
 
         [JsonProperty("cap")]
-        public double Cap { get; set; }
+        public int Cap { get; set; }
 
         [JsonProperty("symbol")]
         public string Symbol { get; set; }

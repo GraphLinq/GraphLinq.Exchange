@@ -17,7 +17,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.InParameters.Add("liveCoinWatch", new NodeParameter(this, "liveCoinWatch", typeof(LiveCoinWatchConnectorNode), true));
 
             this.OutParameters.Add("code", new NodeParameter(this, "code", typeof(string), false));
-            this.OutParameters.Add("countries", new NodeParameter(this, "countries", typeof(array), false));
+            this.OutParameters.Add("countries", new NodeParameter(this, "countries", typeof(string), false));
             this.OutParameters.Add("name", new NodeParameter(this, "name", typeof(string), false));
             this.OutParameters.Add("symbol", new NodeParameter(this, "symbol", typeof(string), false));
             this.OutParameters.Add("flag", new NodeParameter(this, "flag", typeof(string), false));

@@ -8,7 +8,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
 {
     [NodeDefinition("FetchOverviewNode", "Fetch Market Overview", NodeTypeEnum.Function, "LiveCoinWatch")]
     [NodeGraphDescription("Fetch market overview on LiveCoinWatch")]
-    [NodeIDEParameters(Hidden = true)]
+    [NodeIDEParameters(Hidden = false)]
     public class FetchOverviewNode : Node
     {
         public FetchOverviewNode(string id, BlockGraph graph)
@@ -17,10 +17,10 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.InParameters.Add("liveCoinWatch", new NodeParameter(this, "liveCoinWatch", typeof(LiveCoinWatchConnectorNode), true));
             this.InParameters.Add("currency", new NodeParameter(this, "currency", typeof(string), true));
 
-            this.OutParameters.Add("liquidity", new NodeParameter(this, "liquidity", typeof(int), false));
+            this.OutParameters.Add("liquidity", new NodeParameter(this, "liquidity", typeof(double), false));
             this.OutParameters.Add("btcDominance", new NodeParameter(this, "btcDominance", typeof(double), false));
-            this.OutParameters.Add("volume", new NodeParameter(this, "volume", typeof(int), false));
-            this.OutParameters.Add("cap", new NodeParameter(this, "cap", typeof(int), false));
+            this.OutParameters.Add("volume", new NodeParameter(this, "volume", typeof(double), false));
+            this.OutParameters.Add("cap", new NodeParameter(this, "cap", typeof(double), false));
         }
 
         public override bool CanBeExecuted => true;

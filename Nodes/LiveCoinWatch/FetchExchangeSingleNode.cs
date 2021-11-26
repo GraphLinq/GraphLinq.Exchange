@@ -8,7 +8,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
 {
     [NodeDefinition("FetchExchangeSingleNode", "Fetch Single Exchange", NodeTypeEnum.Function, "LiveCoinWatch")]
     [NodeGraphDescription("Fetch single exchange informations on LiveCoinWatch")]
-    [NodeIDEParameters(Hidden = true)]
+    [NodeIDEParameters(Hidden = false)]
     public class FetchExchangeSingleNode : Node
     {
         public FetchExchangeSingleNode(string id, BlockGraph graph)
@@ -18,7 +18,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.InParameters.Add("currency", new NodeParameter(this, "currency", typeof(string), true));
             this.InParameters.Add("exchange", new NodeParameter(this, "exchange", typeof(string), true));
 
-            this.OutParameters.Add("volume", new NodeParameter(this, "volume", typeof(int), false));
+            this.OutParameters.Add("volume", new NodeParameter(this, "volume", typeof(double), false));
             this.OutParameters.Add("png64", new NodeParameter(this, "png64", typeof(string), false));
             this.OutParameters.Add("png128", new NodeParameter(this, "png128", typeof(string), false));
             this.OutParameters.Add("markets", new NodeParameter(this, "markets", typeof(int), false));
@@ -39,7 +39,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
 
             var coinRequest = liveCoinWatchConnectorNode.API.FetchSingleExchange(
                 this.InParameters["currency"].GetValue().ToString(),
-                this.InParameters["exchange"].GetValue().ToString(),
+                this.InParameters["exchange"].GetValue().ToString()
             );
             coinRequest.Wait();
 

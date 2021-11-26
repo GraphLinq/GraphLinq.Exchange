@@ -8,7 +8,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
 {
     [NodeDefinition("FetchSingleCoinNode", "Fetch Single Coin", NodeTypeEnum.Function, "LiveCoinWatch")]
     [NodeGraphDescription("Fetch coin informations on LiveCoinWatch")]
-    [NodeIDEParameters(Hidden = true)]
+    [NodeIDEParameters(Hidden = false)]
     public class FetchSingleCoinNode : Node
     {
         public FetchSingleCoinNode(string id, BlockGraph graph)
@@ -19,14 +19,13 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.InParameters.Add("currency", new NodeParameter(this, "currency", typeof(string), true));
 
             this.OutParameters.Add("allTimeHighUSD", new NodeParameter(this, "allTimeHighUSD", typeof(double), false));
-            this.OutParameters.Add("circulatingSupply", new NodeParameter(this, "circulatingSupply", typeof(int), false));
-            this.OutParameters.Add("totalSupply", new NodeParameter(this, "totalSupply", typeof(int), false));
-            this.OutParameters.Add("maxSupply", new NodeParameter(this, "maxSupply", typeof(int), false));
+            this.OutParameters.Add("circulatingSupply", new NodeParameter(this, "circulatingSupply", typeof(double), false));
+            this.OutParameters.Add("totalSupply", new NodeParameter(this, "totalSupply", typeof(double), false));
+            this.OutParameters.Add("maxSupply", new NodeParameter(this, "maxSupply", typeof(double), false));
             this.OutParameters.Add("rate", new NodeParameter(this, "rate", typeof(double), false));
-            this.OutParameters.Add("volume", new NodeParameter(this, "volume", typeof(int), false));
-            this.OutParameters.Add("cap", new NodeParameter(this, "cap", typeof(int), false));
+            this.OutParameters.Add("volume", new NodeParameter(this, "volume", typeof(double), false));
+            this.OutParameters.Add("cap", new NodeParameter(this, "cap", typeof(double), false));
             this.OutParameters.Add("name", new NodeParameter(this, "name", typeof(string), false));
-            this.OutParameters.Add("symbol", new NodeParameter(this, "symbol", typeof(string), false));
             this.OutParameters.Add("png32", new NodeParameter(this, "png32", typeof(string), false));
             this.OutParameters.Add("png64", new NodeParameter(this, "png64", typeof(string), false));
             this.OutParameters.Add("exchanges", new NodeParameter(this, "exchanges", typeof(int), false));
@@ -43,8 +42,9 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             LiveCoinWatchConnectorNode liveCoinWatchConnectorNode = this.InParameters["liveCoinWatch"].GetValue() as LiveCoinWatchConnectorNode;
 
             var coinRequest = liveCoinWatchConnectorNode.API.FetchCoinSingle(
-                this.InParameters["currency"].GetValue().ToString(),
-                this.InParameters["symbol"].GetValue().ToString()
+                this.InParameters["symbol"].GetValue().ToString(),
+                this.InParameters["currency"].GetValue().ToString()
+                
             );
             coinRequest.Wait();
 
@@ -56,7 +56,6 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.OutParameters["volume"].SetValue(coinRequest.Result.Volume);
             this.OutParameters["cap"].SetValue(coinRequest.Result.Cap);
             this.OutParameters["name"].SetValue(coinRequest.Result.Name);
-            this.OutParameters["symbol"].SetValue(coinRequest.Result.Symbol);
             this.OutParameters["png32"].SetValue(coinRequest.Result.Png32);
             this.OutParameters["png64"].SetValue(coinRequest.Result.Png64);
             this.OutParameters["exchanges"].SetValue(coinRequest.Result.Exchanges);
