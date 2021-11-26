@@ -8,7 +8,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
 {
     [NodeDefinition("FetchCoinListNode", "Fetch Coin List", NodeTypeEnum.Function, "LiveCoinWatch")]
     [NodeGraphDescription("Fetch coin list on LiveCoinWatch")]
-    [NodeIDEParameters(Hidden = false)]
+    [NodeIDEParameters(Hidden = true)]
     public class FetchCoinListNode : Node
     {
         public FetchCoinListNode(string id, BlockGraph graph)
