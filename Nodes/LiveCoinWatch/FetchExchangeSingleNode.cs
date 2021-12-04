@@ -25,8 +25,8 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.OutParameters.Add("bidTotal", new NodeParameter(this, "bidTotal", typeof(double), false));
             this.OutParameters.Add("askTotal", new NodeParameter(this, "askTotal", typeof(double), false));
             this.OutParameters.Add("depth", new NodeParameter(this, "depth", typeof(double), false));
-            this.OutParameters.Add("visitors", new NodeParameter(this, "vistors", typeof(int), false));
-            this.OutParameters.Add("volumePerVistor", new NodeParameter(this, "volumePerVisitor", typeof(double), false));
+            this.OutParameters.Add("visitors", new NodeParameter(this, "visitors", typeof(int), false));
+            this.OutParameters.Add("volumePerVisitor", new NodeParameter(this, "volumePerVisitor", typeof(double), false));
         }
 
         public override bool CanBeExecuted => true;
@@ -50,8 +50,8 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.OutParameters["bidTotal"].SetValue(coinRequest.Result.BidTotal);
             this.OutParameters["askTotal"].SetValue(coinRequest.Result.AskTotal);
             this.OutParameters["depth"].SetValue(coinRequest.Result.Depth);
-            this.OutParameters["vistors"].SetValue(coinRequest.Result.Visitors);
-            this.OutParameters["volumePerVisitor"].SetValue(coinRequest.Result.volumePerVisitor);
+            this.OutParameters["visitors"].SetValue(coinRequest.Result.Visitors);
+            this.OutParameters["volumePerVisitor"].SetValue(coinRequest.Result.VolumePerVisitor);
 
             return true;
         }

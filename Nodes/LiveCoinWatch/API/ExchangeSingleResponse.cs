@@ -47,6 +47,6 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch.API
         public int Visitors { get; set; }
 
         [JsonProperty("volumePerVisitor")]
-        public double volumePerVisitor { get; set; }
+        public double VolumePerVisitor { get; set; }
     }
 }
