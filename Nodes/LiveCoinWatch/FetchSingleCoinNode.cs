@@ -39,6 +39,11 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
 
         public override bool OnExecution()
         {
+
+            if(this.InParameters["currency"].GetValue() == null) {
+                this.InParameters["currency"].SetValue("USD");
+            }
+
             LiveCoinWatchConnectorNode liveCoinWatchConnectorNode = this.InParameters["liveCoinWatch"].GetValue() as LiveCoinWatchConnectorNode;
 
             var coinRequest = liveCoinWatchConnectorNode.API.FetchCoinSingle(
