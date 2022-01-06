@@ -12,7 +12,7 @@ using System.Text;
 namespace NodeBlock.Plugin.Exchange.Nodes.MXC
 {
     [NodeDefinition("MxcConnectorNode", "MXC Connector", NodeTypeEnum.Connector, "MXC")]
-    [NodeGraphDescription("MXC connector, for retrieve your ApiKey and ApiSecret go to your Binance account and create them")]
+    [NodeGraphDescription("MXC connector, for retrieve your ApiKey and ApiSecret go to your MEXC account and create them")]
     public class MxcConnectorNode : Node
     {
         public MxcConnectorNode(string id, BlockGraph graph)
