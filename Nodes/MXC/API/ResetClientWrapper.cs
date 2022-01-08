@@ -12,7 +12,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC.API
         private string secretkey;
         private string accessKey;
         private HttpClient client;
-        private static string host = "https://www.mxc.com";
+        private static string host = "https://www.mexc.com";
 
         public ResetClientWrapper(string secretkey,string accessKey)
         {

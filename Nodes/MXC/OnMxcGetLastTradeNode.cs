@@ -32,7 +32,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
 
         public override void SetupEvent()
         {
-            client = IO.Socket("wss://wbs.mxc.com", new IO.Options() { Transports = ImmutableList<string>.Empty.Add("websocket") });
+            client = IO.Socket("wss://wbs.mexc.com", new IO.Options() { Transports = ImmutableList<string>.Empty.Add("websocket") });
             client.On(Socket.EVENT_CONNECT, () =>
             {
                 var dictionary = new Dictionary<string, string>();
