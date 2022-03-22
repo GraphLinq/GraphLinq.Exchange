@@ -47,14 +47,27 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch.API
                 currency = currency,
 	            code = code,
                 start = start,
-                end = end,
-                meta = true
+                end = end
+                //meta = true
             });
+
             var request = await client.PostAsync(baseUrl + "/coins/single/history", new StringContent(json, Encoding.UTF8, "application/json"));
             var responseContent = await request.Content.ReadAsStringAsync();
             var data = JsonConvert.DeserializeObject<CoinSingleHistoryResponse>(responseContent);
             return data;
         }
+
+        //public Task<CoinSingleHistoryResponse> FetchCoinSingleHistoryData(string history)
+        //{
+        //    var json = JsonConvert.SerializeObject(new
+        //    {
+        //        history = history
+        //    });
+        //    //var request = await client.PostAsync(baseUrl + "/coins/single/history", new StringContent(json, Encoding.UTF8, "application/json"));
+        //    //var responseContent = await request.Content.ReadAsStringAsync();
+        //    var data = JsonConvert.DeserializeObject<CoinSingleHistoryResponse.History>(history);
+        //    return data.Rate/T;
+        //}
 
         public async Task<CoinListResponse> FetchListCoin(string currency, string sort, string order, object offset, object limit)
         {
