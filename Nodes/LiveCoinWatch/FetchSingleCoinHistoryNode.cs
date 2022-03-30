@@ -18,6 +18,12 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
     public class FetchSingleCoinHistoryNode : Node
     {
 
+        public DateTime UnixTimeStampToDate(long timestamp)
+        {
+            DateTime unixDateTime = new DateTime(1970, 1, 1, 0, 0, 0);
+            return unixDateTime.AddMilliseconds(timestamp);
+        }
+
         public FetchSingleCoinHistoryNode(string id, BlockGraph graph)
             : base(id, graph, typeof(FetchSingleCoinHistoryNode).Name)
         {
@@ -51,18 +57,27 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             );
             coinRequest.Wait();
 
-            List<long> dateOfList = coinRequest.Result.History.Select(o => o.Date).ToList();
+            List<DateTime> dateOfList = coinRequest.Result.History.Select(o => UnixTimeStampToDate(o.Date)).ToList();
             List<double> rateList = coinRequest.Result.History.Select(o => o.Rate).ToList();
             List<long> volumeList = coinRequest.Result.History.Select(o => o.Volume).ToList();
             List<long> mktCapList = coinRequest.Result.History.Select(o => o.Cap).ToList();
             List<long> liquidList = coinRequest.Result.History.Select(o => o.Liquidity).ToList();
 
             string fullHistory = JsonConvert.SerializeObject(coinRequest.Result.History);
-            string dateOfData = JsonConvert.SerializeObject(dateOfList);
-            string ratePrData = JsonConvert.SerializeObject(rateList);
-            string volumeData = JsonConvert.SerializeObject(volumeList);
-            string mktCapData = JsonConvert.SerializeObject(mktCapList);
-            string liquidData = JsonConvert.SerializeObject(liquidList);
+
+            // All data points returned
+            //string dateOfData = JsonConvert.SerializeObject(dateOfList);
+            //string ratePrData = JsonConvert.SerializeObject(rateList);
+            //string volumeData = JsonConvert.SerializeObject(volumeList);
+            //string mktCapData = JsonConvert.SerializeObject(mktCapList);
+            //string liquidData = JsonConvert.SerializeObject(liquidList);
+
+            // Every Nth data point returned
+            string dateOfData = JsonConvert.SerializeObject(dateOfList.Where((x, i) => i % 2 == 0));
+            string ratePrData = JsonConvert.SerializeObject(rateList.Where((x, i) => i % 2 == 0));
+            string volumeData = JsonConvert.SerializeObject(volumeList.Where((x, i) => i % 2 == 0));
+            string mktCapData = JsonConvert.SerializeObject(mktCapList.Where((x, i) => i % 2 == 0));
+            string liquidData = JsonConvert.SerializeObject(liquidList.Where((x, i) => i % 2 == 0));
 
             this.OutParameters["fullHistory"].SetValue(fullHistory).ToString();
             this.OutParameters["dates"].SetValue(dateOfData).ToString();
