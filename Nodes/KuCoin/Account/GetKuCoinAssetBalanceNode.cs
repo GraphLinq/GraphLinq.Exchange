@@ -6,12 +6,12 @@ using System.Text;
 
 namespace NodeBlock.Plugin.Exchange.Nodes.KuCoin.Account
 {
-    [NodeDefinition("GetKuCoinAssetBalance", "Get KuCoin Asset Balance", NodeTypeEnum.Function, "KuCoin")]
+    [NodeDefinition("GetKuCoinAssetBalanceNode", "Get KuCoin Asset Balance", NodeTypeEnum.Function, "KuCoin")]
     [NodeGraphDescription("Get your balance of a specific asset on KuCoin")]
-    public class GetKuCoinAssetBalance : Node
+    public class GetKuCoinAssetBalanceNode : Node
     {
-        public GetKuCoinAssetBalance(string id, BlockGraph graph)
-            : base(id, graph, typeof(GetKuCoinAssetBalance).Name)
+        public GetKuCoinAssetBalanceNode(string id, BlockGraph graph)
+            : base(id, graph, typeof(GetKuCoinAssetBalanceNode).Name)
         {
             this.InParameters.Add("kucoin", new NodeParameter(this, "kucoin", typeof(object), true));
             this.InParameters.Add("symbol", new NodeParameter(this, "symbol", typeof(string), true));
