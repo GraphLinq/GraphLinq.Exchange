@@ -45,10 +45,9 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch.API
             var json = JsonConvert.SerializeObject(new
             {
                 currency = currency,
-	            code = code,
+                code = code,
                 start = start,
-                end = end,
-                meta = true
+                end = end
             });
             var request = await client.PostAsync(baseUrl + "/coins/single/history", new StringContent(json, Encoding.UTF8, "application/json"));
             var responseContent = await request.Content.ReadAsStringAsync();
@@ -143,6 +142,5 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch.API
             var data = JsonConvert.DeserializeObject<ExchangeListResponse>(responseContent);
             return data;
         }
-
     }
 }

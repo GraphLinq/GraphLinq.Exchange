@@ -5,60 +5,31 @@ using System.Text;
 
 namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch.API
 {
-    public class CoinSingleHistoryResponse
+    public partial class CoinSingleHistoryResponse
     {
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("history")]
+        public List<History> History { get; set; }
+    }
 
-        [JsonProperty("color")]
-        public string Color { get; set; }
-
-        [JsonProperty("png32")]
-        public string Png32 { get; set; }
-
-        [JsonProperty("png64")]
-        public string Png64 { get; set; }
-
-        [JsonProperty("webp32")]
-        public string Webp32 { get; set; }
-
-        [JsonProperty("webp64")]
-        public string Webp64 { get; set; }
-
-        [JsonProperty("exchanges")]
-        public int Exchanges { get; set; }
-
-        [JsonProperty("markets")]
-        public int Markets { get; set; }
-
-        [JsonProperty("pairs")]
-        public int Pairs { get; set; }
-
-        [JsonProperty("allTimeHighUSD")]
-        public double AllTimeHighUSD { get; set; }
-
-        [JsonProperty("circulatingSupply")]
-        public int CirculatingSupply { get; set; }
-
-        [JsonProperty("totalSupply")]
-        public int TotalSupply { get; set; }
-
-        [JsonProperty("maxSupply")]
-        public int MaxSupply { get; set; }
+    public partial class History
+    {
+        [JsonProperty("date")]
+        public long Date { get; set; }
 
         [JsonProperty("rate")]
         public double Rate { get; set; }
 
         [JsonProperty("volume")]
-        public int Volume { get; set; }
+        public long Volume { get; set; }
 
         [JsonProperty("cap")]
-        public int Cap { get; set; }
+        public long Cap { get; set; }
 
-        [JsonProperty("history")]
-        public string History { get; set; }
-
-        [JsonProperty("symbol")]
-        public string Symbol { get; set; }
+        [JsonProperty("liquidity")]
+        public long Liquidity { get; set; }
+    }
+    public partial class CoinSingleHistoryResponse
+    {
+        public static CoinSingleHistoryResponse FromJson(string json) => JsonConvert.DeserializeObject<CoinSingleHistoryResponse>(json);
     }
 }
