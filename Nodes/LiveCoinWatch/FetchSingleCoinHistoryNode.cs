@@ -56,7 +56,8 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             );
             coinRequest.Wait();
 
-            List<DateTime> dateOfList = coinRequest.Result.History.Select(o => UnixTimeStampToDate(o.Date)).ToList();
+            List<DateTime> dateLi = coinRequest.Result.History.Select(o => UnixTimeStampToDate(o.Date)).ToList();
+            List<string> dateList = dateLi.Select(o => o.ToString("g")).ToList();
             List<double> rateList = coinRequest.Result.History.Select(o => o.Rate).ToList();
             List<long> volumeList = coinRequest.Result.History.Select(o => o.Volume).ToList();
             List<long> mktCapList = coinRequest.Result.History.Select(o => o.Cap).ToList();
@@ -72,7 +73,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             //string liquidData = JsonConvert.SerializeObject(liquidList);
 
             // Every Nth data point returned
-            string dateOfData = JsonConvert.SerializeObject(dateOfList.Where((x, i) => i % 2 == 0));
+            string dateOfData = JsonConvert.SerializeObject(dateList.Where((x, i) => i % 2 == 0));
             string ratePrData = JsonConvert.SerializeObject(rateList.Where((x, i) => i % 2 == 0));
             string volumeData = JsonConvert.SerializeObject(volumeList.Where((x, i) => i % 2 == 0));
             string mktCapData = JsonConvert.SerializeObject(mktCapList.Where((x, i) => i % 2 == 0));
