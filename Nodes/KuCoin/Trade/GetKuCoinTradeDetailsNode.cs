@@ -17,13 +17,13 @@ namespace NodeBlock.Plugin.Exchange.Nodes.KuCoin.Trade
             this.InParameters.Add("tradeId", new NodeParameter(this, "tradeId", typeof(string), true));
 
             this.OutParameters.Add("isActive", new NodeParameter(this, "isActive", typeof(bool), false));
-            this.OutParameters.Add("dealFunds", new NodeParameter(this, "dealFunds", typeof(decimal), false));
-            this.OutParameters.Add("dealQuantity", new NodeParameter(this, "dealQuantity", typeof(decimal), false));
-            this.OutParameters.Add("fee", new NodeParameter(this, "fee", typeof(decimal), false));
+            this.OutParameters.Add("dealFunds", new NodeParameter(this, "dealFunds", typeof(double), false));
+            this.OutParameters.Add("dealQuantity", new NodeParameter(this, "dealQuantity", typeof(double), false));
+            this.OutParameters.Add("fee", new NodeParameter(this, "fee", typeof(double), false));
             this.OutParameters.Add("feeCurrency", new NodeParameter(this, "feeCurrency", typeof(string), false));
-            this.OutParameters.Add("funds", new NodeParameter(this, "funds", typeof(decimal), false));
-            this.OutParameters.Add("price", new NodeParameter(this, "price", typeof(decimal), false));
-            this.OutParameters.Add("quantity", new NodeParameter(this, "quantity", typeof(decimal), false));
+            this.OutParameters.Add("funds", new NodeParameter(this, "funds", typeof(double), false));
+            this.OutParameters.Add("price", new NodeParameter(this, "price", typeof(double), false));
+            this.OutParameters.Add("quantity", new NodeParameter(this, "quantity", typeof(double), false));
             this.OutParameters.Add("side", new NodeParameter(this, "side", typeof(string), false));
             this.OutParameters.Add("type", new NodeParameter(this, "type", typeof(string), false));
         }

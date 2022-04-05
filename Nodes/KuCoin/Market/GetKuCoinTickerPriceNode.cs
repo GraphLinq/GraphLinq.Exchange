@@ -16,11 +16,11 @@ namespace NodeBlock.Plugin.Exchange.Nodes.KuCoin.Trade
             this.InParameters.Add("kucoin", new NodeParameter(this, "kucoin", typeof(object), true));
             this.InParameters.Add("symbol", new NodeParameter(this, "symbol", typeof(string), true));
 
-            this.OutParameters.Add("bestAsk", new NodeParameter(this, "bestAsk", typeof(decimal), false));
-            this.OutParameters.Add("bestAskQuantity", new NodeParameter(this, "bestAskQuantity", typeof(decimal), false));
-            this.OutParameters.Add("bestBid", new NodeParameter(this, "bestBid", typeof(decimal), false));
-            this.OutParameters.Add("lastTradePrice", new NodeParameter(this, "lastTradePrice", typeof(decimal), false));
-            this.OutParameters.Add("lastTradeQuantity", new NodeParameter(this, "lastTradeQuantity", typeof(decimal), false));
+            this.OutParameters.Add("bestAsk", new NodeParameter(this, "bestAsk", typeof(double), false));
+            this.OutParameters.Add("bestAskQuantity", new NodeParameter(this, "bestAskQuantity", typeof(double), false));
+            this.OutParameters.Add("bestBid", new NodeParameter(this, "bestBid", typeof(double), false));
+            this.OutParameters.Add("lastTradePrice", new NodeParameter(this, "lastTradePrice", typeof(double), false));
+            this.OutParameters.Add("lastTradeQuantity", new NodeParameter(this, "lastTradeQuantity", typeof(double), false));
         }
 
         public override bool CanBeExecuted => true;

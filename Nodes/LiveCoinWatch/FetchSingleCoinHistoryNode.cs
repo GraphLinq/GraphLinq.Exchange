@@ -12,7 +12,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
 {
     [NodeDefinition("FetchSingleCoinHistoryNode", "Fetch Single Coin History", NodeTypeEnum.Function, "LiveCoinWatch")]
     [NodeGraphDescription("Fetch coin history on LiveCoinWatch")]
-    [NodeIDEParameters(Hidden = false)]
+    [NodeIDEParameters(Hidden = true)]
 
     public class FetchSingleCoinHistoryNode : Node
     {
