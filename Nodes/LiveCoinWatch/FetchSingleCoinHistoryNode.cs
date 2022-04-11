@@ -58,10 +58,10 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
 
             List<DateTime> dateLi = coinRequest.Result.History.Select(o => UnixTimeStampToDate(o.Date)).ToList();
             List<string> dateList = dateLi.Select(o => o.ToString("g")).ToList();
-            List<double> rateList = coinRequest.Result.History.Select(o => o.Rate).ToList();
-            List<long> volumeList = coinRequest.Result.History.Select(o => o.Volume).ToList();
-            List<long> mktCapList = coinRequest.Result.History.Select(o => o.Cap).ToList();
-            List<long> liquidList = coinRequest.Result.History.Select(o => o.Liquidity).ToList();
+            List<double?> rateList = coinRequest.Result.History.Select(o => o.Rate).ToList();
+            List<long?> volumeList = coinRequest.Result.History.Select(o => o.Volume).ToList();
+            List<long?> mktCapList = coinRequest.Result.History.Select(o => o.Cap).ToList();
+            List<long?> liquidList = coinRequest.Result.History.Select(o => o.Liquidity).ToList();
 
             string fullHistory = JsonConvert.SerializeObject(coinRequest.Result.History);
 
