@@ -11,10 +11,10 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Bittrex.Events
     [NodeDefinition("OnBittrexTickerUpdateNode", "On Bittrex Pair Ticker Update", NodeTypeEnum.Event, "Bittrex")]
     [NodeGraphDescription("Get a event when the book ticker is updated on Bittrex for a symbol")]
     [NodeCycleLimit(1000)]
-    public class OnCoinExTickerUpdateNode : Node
+    public class OnBittrexTickerUpdateNode : Node
     {
-        public OnCoinExTickerUpdateNode(string id, BlockGraph graph)
-              : base(id, graph, typeof(OnCoinExTickerUpdateNode).Name)
+        public OnBittrexTickerUpdateNode(string id, BlockGraph graph)
+              : base(id, graph, typeof(OnBittrexTickerUpdateNode).Name)
         {
             this.IsEventNode = true;
 
