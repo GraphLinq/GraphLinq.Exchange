@@ -41,12 +41,12 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Binance
                 this.OutParameters["result"].SetValue(order.Success);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 this.InParameters["result"].SetValue(false);
                 return false;
             }
-            
+
             return true;
         }
     }
