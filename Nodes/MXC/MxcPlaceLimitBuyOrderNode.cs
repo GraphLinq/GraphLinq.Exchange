@@ -48,7 +48,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
                 this.OutParameters["orderId"].SetValue(result.data);
                 this.OutParameters["result"].SetValue(true);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 this.InParameters["result"].SetValue(false);
                 return false;

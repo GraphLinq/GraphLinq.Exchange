@@ -43,15 +43,15 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
                 param.Add("trade_type", "ASK");
                 param.Add("order_type", "LIMIT_ORDER");
 
-                var result = mxcConnector.Client.Post<dynamic>("/open/api/v2/order/place", param, true); 
-                
-             
+                var result = mxcConnector.Client.Post<dynamic>("/open/api/v2/order/place", param, true);
+
+
 
                 this.OutParameters["orderId"].SetValue(result.data);
                 this.OutParameters["result"].SetValue(true);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 this.InParameters["result"].SetValue(false);
                 return false;

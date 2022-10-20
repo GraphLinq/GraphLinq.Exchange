@@ -49,15 +49,15 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
                 param.Add("trade_type", "BID");
                 param.Add("order_type", "IMMEDIATE_OR_CANCEL");
 
-                result = mxcConnector.Client.Post<dynamic>("/open/api/v2/order/place", param, true); 
-                
-             
+                result = mxcConnector.Client.Post<dynamic>("/open/api/v2/order/place", param, true);
+
+
 
                 this.OutParameters["orderId"].SetValue(result.data);
                 this.OutParameters["result"].SetValue(true);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 this.InParameters["result"].SetValue(false);
                 return false;
