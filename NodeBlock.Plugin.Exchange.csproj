@@ -36,10 +36,15 @@
     <PackageReference Include="Kucoin.Net" Version="2.3.4" />
     <PackageReference Include="NetTrader.Indicator" Version="1.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Alex75.CoinbaseApiClient" Version="0.5.16" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\GraphLinq.Engine\NodeBlock.Engine.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Nodes\Coinbase\GraphQL\" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
