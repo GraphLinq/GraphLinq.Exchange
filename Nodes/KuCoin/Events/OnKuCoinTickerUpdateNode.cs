@@ -34,7 +34,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.KuCoin.Events
             KuCoinConnectorNode connector = this.InParameters["kucoin"].GetValue() as KuCoinConnectorNode;
             connector.SocketClient.SubscribeToTickerUpdates(this.InParameters["symbol"].GetValue().ToString(), (data) =>
             {
-                var instanciatedParameters = this.InstanciateParametersForCycle();
+                var instanciatedParameters = this.InstanciatedParametersForCycle();
                 instanciatedParameters["bestAskPrice"].SetValue((double)data.BestAsk);
                 instanciatedParameters["bestAskQuantity"].SetValue((double)data.BestAskQuantity);
                 instanciatedParameters["bestBidPrice"].SetValue((double)data.BestBid);

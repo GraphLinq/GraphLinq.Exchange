@@ -35,7 +35,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Bitfinex
             BitfinexConnectorNode bitfinexConnector = this.InParameters["bitfinex"].GetValue() as BitfinexConnectorNode;
             bitfinexConnector.SocketClient.SubscribeToBookUpdates(this.InParameters["symbol"].GetValue().ToString(),Precision.PrecisionLevel0,Frequency.Realtime,100, (data) =>
             {
-                var instanciatedParameters = this.InstanciateParametersForCycle();
+                var instanciatedParameters = this.InstanciatedParametersForCycle();
                 instanciatedParameters["bestPrice"].SetValue((decimal)data.ToList()[0].Price);
                 instanciatedParameters["bestQuantity"].SetValue((decimal)data.ToList()[0].Quantity);
                 this.Graph.AddCycle(this, instanciatedParameters);

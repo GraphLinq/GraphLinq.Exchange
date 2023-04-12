@@ -38,7 +38,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Huobi.Events
             HuobiConnectorNode connector = this.InParameters["huobi"].GetValue() as HuobiConnectorNode;
             connector.SocketClient.SubscribeToKlineUpdates(this.InParameters["symbol"].GetValue().ToString(), HuobiPeriod.FiveMinutes, (data) =>
             {
-                var instanciatedParameters = this.InstanciateParametersForCycle();
+                var instanciatedParameters = this.InstanciatedParametersForCycle();
                 instanciatedParameters["amount"].SetValue((double)data.Amount);
                 instanciatedParameters["open"].SetValue((double)data.Open);
                 instanciatedParameters["close"].SetValue((double)data.Close);

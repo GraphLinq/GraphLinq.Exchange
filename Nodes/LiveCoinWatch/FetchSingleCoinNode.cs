@@ -1,4 +1,5 @@
-﻿using NodeBlock.Engine;
+﻿using NetTrader.Indicator;
+using NodeBlock.Engine;
 using NodeBlock.Engine.Attributes;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
 {
     [NodeDefinition("FetchSingleCoinNode", "Fetch Single Coin", NodeTypeEnum.Function, "LiveCoinWatch")]
-    [NodeGraphDescription("Fetch coin informations on LiveCoinWatch")]
+    [NodeGraphDescription("Fetch coin information on LiveCoinWatch")]
     [NodeIDEParameters(Hidden = false)]
     public class FetchSingleCoinNode : Node
     {
@@ -31,6 +32,11 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.OutParameters.Add("exchanges", new NodeParameter(this, "exchanges", typeof(int), false));
             this.OutParameters.Add("markets", new NodeParameter(this, "markets", typeof(int), false));
             this.OutParameters.Add("pairs", new NodeParameter(this, "pairs", typeof(int), false));
+            this.OutParameters.Add("delta1H", new NodeParameter(this, "delta1H", typeof(double), false));
+            this.OutParameters.Add("delta1D", new NodeParameter(this, "delta1D", typeof(double), false));
+            this.OutParameters.Add("delta1W", new NodeParameter(this, "delta1W", typeof(double), false));
+            this.OutParameters.Add("delta1Q", new NodeParameter(this, "delta1Q", typeof(double), false));
+            this.OutParameters.Add("delta1Y", new NodeParameter(this, "delta1Y", typeof(double), false));
         }
 
         public override bool CanBeExecuted => true;
@@ -66,6 +72,12 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.OutParameters["exchanges"].SetValue(coinRequest.Result.Exchanges);
             this.OutParameters["markets"].SetValue(coinRequest.Result.Markets);
             this.OutParameters["pairs"].SetValue(coinRequest.Result.Pairs);
+            this.OutParameters["delta1H"].SetValue(coinRequest.Result.Deltas.ToString());
+            this.OutParameters["delta1D"].SetValue(coinRequest.Result.Deltas.ToString());
+            this.OutParameters["delta1M"].SetValue(coinRequest.Result.Deltas.ToString());
+            this.OutParameters["delta1Q"].SetValue(coinRequest.Result.Deltas.ToString());
+            this.OutParameters["delta1Y"].SetValue(coinRequest.Result.Deltas.ToString());
+
 
             return true;
         }

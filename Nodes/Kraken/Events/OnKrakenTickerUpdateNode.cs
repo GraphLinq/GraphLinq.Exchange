@@ -34,7 +34,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Kraken.Events
             KrakenConnectorNode connector = this.InParameters["kraken"].GetValue() as KrakenConnectorNode;
             connector.SocketClient.SubscribeToTickerUpdates(this.InParameters["symbol"].GetValue().ToString(), (data) =>
             {
-                var instanciatedParameters = this.InstanciateParametersForCycle();
+                var instanciatedParameters = this.InstanciatedParametersForCycle();
                 instanciatedParameters["bestAskPrice"].SetValue((double)data.Data.BestAsks.Price);
                 instanciatedParameters["bestAskQuantity"].SetValue((double)data.Data.BestAsks.Quantity);
                 instanciatedParameters["bestBidPrice"].SetValue((double)data.Data.BestBids.Price);

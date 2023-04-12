@@ -5,10 +5,17 @@ using System.Text;
 
 namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch.API
 {
-    public class CoinSingleResponse
+
+    public partial class CoinSingleResponse
     {
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        [JsonProperty("rank")]
+        public int Rank { get; set; }
+
+        [JsonProperty("age")]
+        public int Age { get; set; }
 
         [JsonProperty("color")]
         public string Color { get; set; }
@@ -55,7 +62,32 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch.API
         [JsonProperty("cap")]
         public double Cap { get; set; }
 
-        [JsonProperty("symbol")]
-        public string Symbol { get; set; }
+        [JsonProperty("delta")]
+        public Array Delta { get; set; }
+
+        [JsonProperty("delta")]
+        public List<Deltas> Deltas { get; set; }
+    }
+
+    public partial class Deltas
+    {
+        [JsonProperty("hour")]
+        public double? Hour { get; set; }
+
+        [JsonProperty("day")]
+        public double? Day { get; set; }
+
+        [JsonProperty("week")]
+        public double? Week { get; set; }
+
+        [JsonProperty("month")]
+        public double? Month { get; set; }
+
+        [JsonProperty("quarter")]
+        public double? Quarter { get; set; }
+
+        [JsonProperty("year")]
+        public double? Year { get; set; }
+
     }
 }

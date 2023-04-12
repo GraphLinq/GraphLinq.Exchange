@@ -37,7 +37,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Bittrex.Events
             BittrexConnectorNode bittrexConnector = this.InParameters["bittrex"].GetValue() as BittrexConnectorNode;
             var result = bittrexConnector.SocketClient.SubscribeToSymbolTickerUpdatesAsync(this.InParameters["symbol"].GetValue().ToString(), (data) =>
             {
-                var instanciatedParameters = this.InstanciateParametersForCycle();
+                var instanciatedParameters = this.InstanciatedParametersForCycle();
                 instanciatedParameters["bestAskPrice"].SetValue(data.AskRate);
                 instanciatedParameters["bestBidPrice"].SetValue(data.BidRate);
                 instanciatedParameters["lastTradeRate"].SetValue(data.LastTradeRate);

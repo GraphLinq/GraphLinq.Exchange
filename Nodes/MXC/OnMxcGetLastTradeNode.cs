@@ -59,7 +59,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.MXC
 
         private void OnEvent(dynamic data)
         {
-            var instanciatedParameters = this.InstanciateParametersForCycle();
+            var instanciatedParameters = this.InstanciatedParametersForCycle();
 
             var deals = data.data?.deals;
             if(deals != null)

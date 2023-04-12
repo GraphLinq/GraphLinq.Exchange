@@ -43,7 +43,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.CoinEx.Events
             coinExConnector.SocketClient.SubscribeToKlineUpdates(this.InParameters["symbol"].GetValue().ToString(),KlineInterval.FiveMinute, (currency,data) =>
             {
                 
-                var instanciatedParameters = this.InstanciateParametersForCycle();
+                var instanciatedParameters = this.InstanciatedParametersForCycle();
                 
                 instanciatedParameters["amount"].SetValue((double)data.First().Amount);
                 instanciatedParameters["open"].SetValue((double)data.First().Open);

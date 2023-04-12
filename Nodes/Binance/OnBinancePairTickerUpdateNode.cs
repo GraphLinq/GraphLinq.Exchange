@@ -34,7 +34,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Binance
             BinanceConnectorNode binanceConnector = this.InParameters["connection"].GetValue() as BinanceConnectorNode;
             binanceConnector.SocketClient.Spot.SubscribeToBookTickerUpdates(this.InParameters["symbol"].GetValue().ToString(), (data) =>
             {
-                var instanciatedParameters = this.InstanciateParametersForCycle();
+                var instanciatedParameters = this.InstanciatedParametersForCycle();
                 instanciatedParameters["bestAskPrice"].SetValue((double)data.BestAskPrice);
                 instanciatedParameters["bestAskQuantity"].SetValue((double)data.BestAskQuantity);
                 instanciatedParameters["bestBidPrice"].SetValue((double)data.BestBidPrice);
