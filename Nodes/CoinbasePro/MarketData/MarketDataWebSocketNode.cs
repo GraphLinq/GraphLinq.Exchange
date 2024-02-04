@@ -20,8 +20,6 @@ namespace NodeBlock.Plugin.Exchange.Nodes.CoinbasePro.MarketData
             this.OutParameters.Add("message", new NodeParameter(this, "message", typeof(string), false));
         }
 
-        private CoinbaseProWebSocket SocketClient;
-
         public override bool CanBeExecuted => false;
 
         public override bool CanExecute => true;
