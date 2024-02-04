@@ -1,18 +1,21 @@
-﻿using NodeBlock.Engine;
+﻿using Coinbase.Pro.Models;
+using NodeBlock.Engine;
 using NodeBlock.Engine.Attributes;
+using NodeBlock.Plugin.Exchange.Nodes.Binance;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NodeBlock.Plugin.Exchange.Nodes.CoinbasePro
 {
-    [NodeDefinition("OnCoinbaseProPairTickerUpdateNode", "On CoinbasePro Pair Ticker Update", NodeTypeEnum.Event, "CoinbasePro")]
-    [NodeGraphDescription("Get a event when the book ticker is updated on CoinbasePro for a symbol")]
+    [NodeDefinition("OnCoinbaseProUserChannelMsgNode", "On CoinbasePro User Channel Update Message", NodeTypeEnum.Event, "CoinbasePro")]
+    [NodeGraphDescription("Get an event for the CoinbasePro WebSocket User Channel Message")]
     [NodeCycleLimit(1000)]
-    public class OnCoinbaseProPairTickerUpdateNode : Node
+    public class OnCoinbaseProUserChannelMsgNode : Node
     {
-        public OnCoinbaseProPairTickerUpdateNode(string id, BlockGraph graph)
-              : base(id, graph, typeof(OnCoinbaseProPairTickerUpdateNode).Name)
+        public OnCoinbaseProUserChannelMsgNode(string id, BlockGraph graph)
+              : base(id, graph, typeof(OnCoinbaseProUserChannelMsgNode).Name)
         {
             this.IsEventNode = true;
 
@@ -25,20 +28,39 @@ namespace NodeBlock.Plugin.Exchange.Nodes.CoinbasePro
 
         public override bool CanExecute => true;
 
-        public override void SetupEvent()
+
+        public override async void SetupEvent()
         {
+            var instanciatedParameters = this.InstanciatedParametersForCycle();
+            //BinanceConnectorNode binanceConnector = this.InParameters["connection"].GetValue() as BinanceConnectorNode;
             CoinbaseProConnectorNode coinbaseConnector = this.InParameters["connection"].GetValue() as CoinbaseProConnectorNode;
-            coinbaseConnector.SocketClient.Spot.SubscribeToBookTickerUpdates(this.InParameters["connection"].GetValue(), (data) =>
+            //coinbaseConnector.SocketClient.ConnectAsync();
+            //coinbaseConnector.SocketClient
+            var sub = new Subscription
             {
-                var instanciatedParameters = this.InstanciatedParametersForCycle();
-                instanciatedParameters["message"].SetValue((string)data.Message);
-                this.Graph.AddCycle(this, instanciatedParameters);
-            });
+                ProductIds =
+            {
+            "BTC-USD",
+            },
+                Channels =
+            {
+            "heartbeat",
+            }
+            };
+
+            //send the subscription upstream
+            await coinbaseConnector.SocketClient.SubscribeAsync(sub);
+
+            //now wait for data.
+            await Task.Delay(TimeSpan.FromMinutes(1));
+
+            this.Graph.AddCycle(this, instanciatedParameters);
         }
 
         public override void BeginCycle()
         {
             this.Next();
         }
+
     }
 }

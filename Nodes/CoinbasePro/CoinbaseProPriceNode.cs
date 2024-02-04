@@ -7,19 +7,24 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NodeBlock.Plugin.Exchange.Nodes.Coinbase
+namespace NodeBlock.Plugin.Exchange.Nodes.CoinbasePro
 {
-    [NodeDefinition("CoinbasePriceNode", "Get Coinbase Price", NodeTypeEnum.Function, "Coinbase")]
-    [NodeGraphDescription("Get the current price on Coinbase for a symbol")]
-    public class CoinbasePriceNode : Node
+    [NodeDefinition("CoinbaseProPriceNode", "Get CoinbasePro Price", NodeTypeEnum.Function, "CoinbasePro")]
+    [NodeGraphDescription("Get the current price on Coinbase pro for a symbol")]
+    public class CoinbaseProPriceNode : Node
     {
-        public CoinbasePriceNode(string id, BlockGraph graph)
-              : base(id, graph, typeof(CoinbasePriceNode).Name)
+        public CoinbaseProPriceNode(string id, BlockGraph graph)
+              : base(id, graph, typeof(CoinbaseProPriceNode).Name)
         {
-            this.InParameters.Add("connection", new NodeParameter(this, "connection", typeof(CoinbaseConnectorNode), true));
+            this.InParameters.Add("connection", new NodeParameter(this, "connection", typeof(CoinbaseProConnectorNode), true));
             this.InParameters.Add("symbol", new NodeParameter(this, "symbol", typeof(string), true));
 
             this.OutParameters.Add("price", new NodeParameter(this, "price", typeof(double), false));
+            this.OutParameters.Add("open", new NodeParameter(this, "open", typeof(double), false));
+            this.OutParameters.Add("high", new NodeParameter(this, "high", typeof(double), false));
+            this.OutParameters.Add("low", new NodeParameter(this, "low", typeof(double), false));
+            this.OutParameters.Add("volume", new NodeParameter(this, "volume", typeof(double), false));
+
         }
 
         public override bool CanBeExecuted => true;
@@ -28,12 +33,18 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Coinbase
 
         public override bool OnExecution()
         {
-            CoinbaseConnectorNode coinbaseConnector = this.InParameters["connection"].GetValue() as CoinbaseConnectorNode;
+            CoinbaseProConnectorNode coinbaseProConnector = this.InParameters["connection"].GetValue() as CoinbaseProConnectorNode;
 
-            var request = coinbaseConnector.Client.Data.GetSpotPriceAsync(this.InParameters["symbol"].GetValue().ToString());
+            var request = coinbaseProConnector.Client.MarketData.GetStatsAsync(this.InParameters["symbol"].GetValue().ToString());
             request.Wait();
 
-            this.OutParameters["price"].SetValue(request.Result.Data.Amount);
+            this.OutParameters["price"].SetValue(request.Result.Last);
+            this.OutParameters["open"].SetValue(request.Result.Open);
+            this.OutParameters["high"].SetValue(request.Result.High);
+            this.OutParameters["low"].SetValue(request.Result.Low);
+            this.OutParameters["volume"].SetValue(request.Result.Volume);
+
+
             return true;
         }
     }
