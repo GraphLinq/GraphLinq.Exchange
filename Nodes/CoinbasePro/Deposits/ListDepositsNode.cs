@@ -1,5 +1,4 @@
-﻿/*
-using Coinbase.Pro;
+﻿using Coinbase.Pro;
 using NodeBlock.Engine;
 using NodeBlock.Engine.Attributes;
 using System.Collections.Generic;
@@ -27,11 +26,10 @@ namespace NodeBlock.Plugin.Exchange.Nodes.CoinbasePro.Deposits
         {
             CoinbaseProConnectorNode coinbaseProConnector = this.InParameters["connection"].GetValue() as CoinbaseProConnectorNode;
 
-            var deposits = await coinbaseProConnector.Client.Deposits.ListDepositsAsync();
+            var deposits = await coinbaseProConnector.Client.Deposits.ListDeposits();
 
             this.OutParameters["deposits"].SetValue(deposits);
             return true;
         }
     }
 }
-*/

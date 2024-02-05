@@ -1,5 +1,4 @@
-﻿/*
-using Coinbase.Pro;
+﻿using Coinbase.Pro;
 using Coinbase.Pro.Models;
 using NodeBlock.Engine;
 using NodeBlock.Engine.Attributes;
@@ -29,11 +28,11 @@ namespace NodeBlock.Plugin.Exchange.Nodes.CoinbasePro.Accounts
             CoinbaseProConnectorNode coinbaseProConnector = this.InParameters["connection"].GetValue() as CoinbaseProConnectorNode;
             string accountId = this.InParameters["accountId"].GetValue().ToString();
 
-            var accountHolds = await coinbaseProConnector.Client.Accounts.GetAccountHoldsAsync(accountId);
+            var accountHolds = await coinbaseProConnector.Client.Accounts.GetAccountHoldAsync(accountId);
 
             this.OutParameters["accountHolds"].SetValue(accountHolds);
             return true;
         }
     }
 }
-*/
+
