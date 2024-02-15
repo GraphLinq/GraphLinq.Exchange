@@ -1,12 +1,7 @@
 ﻿using Coinbase;
-using Flurl;
-using Flurl.Http;
 using Newtonsoft.Json;
 using NodeBlock.Engine;
 using NodeBlock.Engine.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NodeBlock.Plugin.Exchange.Nodes.Coinbase
 {
@@ -28,9 +23,6 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Coinbase
         [JsonIgnore]
         public CoinbaseClient Client { get; set; }
 
-        [JsonIgnore]
-        //public CoinbaseSocketClient SocketClient { get; set; }
-
         public override bool CanBeExecuted => false;
 
         public override bool CanExecute => true;
@@ -43,8 +35,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Coinbase
 
         public override void OnStop()
         {
-            this.Client.Dispose();
-            //this.SocketClient.Dispose();
+            this.Client?.Dispose();
         }
 
         public override object ComputeParameterValue(NodeParameter parameter, object value)
