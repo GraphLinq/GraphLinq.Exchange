@@ -7,6 +7,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Coinbase
 {
     [NodeDefinition("CoinbaseConnectorNode", "Coinbase Connector", NodeTypeEnum.Connector, "Coinbase")]
     [NodeGraphDescription("Coinbase connector, for retrieve your ApiKey and ApiSecret go to your Coinbase account and create them")]
+    [NodeSpecialActionAttribute("Go to Coinbase", "open_url", "https://www.coinbase.com")]
     public class CoinbaseConnectorNode : Node
     {
         public CoinbaseConnectorNode(string id, BlockGraph graph)
@@ -29,7 +30,21 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Coinbase
 
         public override void SetupConnector()
         {
-            this.Client = new CoinbaseClient(new ApiKeyConfig { ApiKey = this.InParameters["apiKey"].GetValue().ToString(), ApiSecret = this.InParameters["apiSecret"].GetValue().ToString() });
+            var apiKey = this.InParameters["apiKey"].GetValue()?.ToString();
+            var apiSecret = this.InParameters["apiSecret"].GetValue()?.ToString();
+
+            if (string.IsNullOrEmpty(apiKey) || string.IsNullOrEmpty(apiSecret))
+            {
+                this.Client = new CoinbaseClient();
+            }
+            else
+            {
+                this.Client = new CoinbaseClient(new ApiKeyConfig
+                {
+                    ApiKey = apiKey,
+                    ApiSecret = apiSecret
+                });
+            }
             this.Next();
         }
 
