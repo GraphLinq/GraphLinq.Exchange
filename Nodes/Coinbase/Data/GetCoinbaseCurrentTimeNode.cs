@@ -19,9 +19,6 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Coinbase.Data
             this.OutParameters.Add("epoch", new NodeParameter(this, "epoch", typeof(long), false));
         }
 
-        [JsonIgnore]
-        public JsonResponse Time { get; private set; }
-
         public override bool CanBeExecuted => true;
 
         public override bool CanExecute => true;

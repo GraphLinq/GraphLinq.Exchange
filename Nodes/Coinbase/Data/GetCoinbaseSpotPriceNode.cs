@@ -20,9 +20,6 @@ namespace NodeBlock.Plugin.Exchange.Nodes.Coinbase.Data
             this.OutParameters.Add("base", new NodeParameter(this, "base", typeof(string), false));
         }
 
-        [JsonIgnore]
-        public JsonResponse Money { get; private set; }
-
         public override bool CanBeExecuted => true;
 
         public override bool CanExecute => true;
