@@ -1,7 +1,6 @@
+using Coinbase.Models;
 using NodeBlock.Engine;
 using NodeBlock.Engine.Attributes;
-using Coinbase.Models;
-using Newtonsoft.Json;
 using System;
 
 namespace NodeBlock.Plugin.Exchange.Nodes.Coinbase.Data
