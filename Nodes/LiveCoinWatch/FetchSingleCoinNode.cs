@@ -32,11 +32,12 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.OutParameters.Add("exchanges", new NodeParameter(this, "exchanges", typeof(int), false));
             this.OutParameters.Add("markets", new NodeParameter(this, "markets", typeof(int), false));
             this.OutParameters.Add("pairs", new NodeParameter(this, "pairs", typeof(int), false));
-            this.OutParameters.Add("delta1H", new NodeParameter(this, "delta1H", typeof(double), false));
-            this.OutParameters.Add("delta1D", new NodeParameter(this, "delta1D", typeof(double), false));
-            this.OutParameters.Add("delta1W", new NodeParameter(this, "delta1W", typeof(double), false));
-            this.OutParameters.Add("delta1Q", new NodeParameter(this, "delta1Q", typeof(double), false));
-            this.OutParameters.Add("delta1Y", new NodeParameter(this, "delta1Y", typeof(double), false));
+            this.OutParameters.Add("hour", new NodeParameter(this, "hour", typeof(double), false));
+            this.OutParameters.Add("day", new NodeParameter(this, "day", typeof(double), false));
+            this.OutParameters.Add("week", new NodeParameter(this, "week", typeof(double), false));
+            this.OutParameters.Add("month", new NodeParameter(this, "month", typeof(double), false));
+            this.OutParameters.Add("quarter", new NodeParameter(this, "quarter", typeof(double), false));
+            this.OutParameters.Add("year", new NodeParameter(this, "year", typeof(double), false));
         }
 
         public override bool CanBeExecuted => true;
@@ -72,11 +73,11 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.OutParameters["exchanges"].SetValue(coinRequest.Result.Exchanges);
             this.OutParameters["markets"].SetValue(coinRequest.Result.Markets);
             this.OutParameters["pairs"].SetValue(coinRequest.Result.Pairs);
-            this.OutParameters["delta1H"].SetValue(coinRequest.Result.Deltas.ToString());
-            this.OutParameters["delta1D"].SetValue(coinRequest.Result.Deltas.ToString());
-            this.OutParameters["delta1M"].SetValue(coinRequest.Result.Deltas.ToString());
-            this.OutParameters["delta1Q"].SetValue(coinRequest.Result.Deltas.ToString());
-            this.OutParameters["delta1Y"].SetValue(coinRequest.Result.Deltas.ToString());
+            this.OutParameters["hour"].SetValue(coinRequest.Result.Deltas.ToString());
+            this.OutParameters["day"].SetValue(coinRequest.Result.Deltas.ToString());
+            this.OutParameters["month"].SetValue(coinRequest.Result.Deltas.ToString());
+            this.OutParameters["quarter"].SetValue(coinRequest.Result.Deltas.ToString());
+            this.OutParameters["year"].SetValue(coinRequest.Result.Deltas.ToString());
 
 
             return true;

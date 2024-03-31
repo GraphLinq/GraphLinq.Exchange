@@ -63,10 +63,7 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch.API
         public double Cap { get; set; }
 
         [JsonProperty("delta")]
-        public Array Delta { get; set; }
-
-        [JsonProperty("delta")]
-        public List<Deltas> Deltas { get; set; }
+        public JsonArrayAttribute Deltas { get; set; }
     }
 
     public partial class Deltas
