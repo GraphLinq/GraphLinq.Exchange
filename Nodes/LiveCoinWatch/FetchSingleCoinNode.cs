@@ -75,7 +75,8 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.OutParameters["markets"].SetValue(coinRequest.Result.Markets);
             this.OutParameters["pairs"].SetValue(coinRequest.Result.Pairs);
             this.OutParameters["hour"].SetValue(coinRequest.Result.Delta.Hour);
-            this.OutParameters["day"].SetValue(coinRequest.Result.Delta.Week);
+            this.OutParameters["day"].SetValue(coinRequest.Result.Delta.Day);
+            this.OutParameters["week"].SetValue(coinRequest.Result.Delta.Week);
             this.OutParameters["month"].SetValue(coinRequest.Result.Delta.Month);
             this.OutParameters["quarter"].SetValue(coinRequest.Result.Delta.Quarter);
             this.OutParameters["year"].SetValue(coinRequest.Result.Delta.Year);
