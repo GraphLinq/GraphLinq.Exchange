@@ -1,6 +1,7 @@
 ﻿using NetTrader.Indicator;
 using NodeBlock.Engine;
 using NodeBlock.Engine.Attributes;
+using NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch.API;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -73,11 +74,11 @@ namespace NodeBlock.Plugin.Exchange.Nodes.LiveCoinWatch
             this.OutParameters["exchanges"].SetValue(coinRequest.Result.Exchanges);
             this.OutParameters["markets"].SetValue(coinRequest.Result.Markets);
             this.OutParameters["pairs"].SetValue(coinRequest.Result.Pairs);
-            this.OutParameters["hour"].SetValue(coinRequest.Result.Deltas.ToString());
-            this.OutParameters["day"].SetValue(coinRequest.Result.Deltas.ToString());
-            this.OutParameters["month"].SetValue(coinRequest.Result.Deltas.ToString());
-            this.OutParameters["quarter"].SetValue(coinRequest.Result.Deltas.ToString());
-            this.OutParameters["year"].SetValue(coinRequest.Result.Deltas.ToString());
+            this.OutParameters["hour"].SetValue(coinRequest.Result.Delta.Hour);
+            this.OutParameters["day"].SetValue(coinRequest.Result.Delta.Week);
+            this.OutParameters["month"].SetValue(coinRequest.Result.Delta.Month);
+            this.OutParameters["quarter"].SetValue(coinRequest.Result.Delta.Quarter);
+            this.OutParameters["year"].SetValue(coinRequest.Result.Delta.Year);
 
 
             return true;
